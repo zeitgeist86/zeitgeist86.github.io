@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="a"/>
+  <meta name="description" content="随机分析 No.1 - 条件期望"/>
 
 
 
@@ -30,18 +30,18 @@
 
 
 
-<link rel="canonical" href="http://example.com/2021/08/15/a/"/>
+<link rel="canonical" href="http://example.com/2021/08/15/stochastic1/"/>
 
 
-<meta name="description" content="default_layout default">
+<meta name="description" content="条件期望简言之，条件期望是对随机变量$Y$给定条件（随机变量）$X$时最好的猜测。记作$E(Y|X)$。显然，$Y$本身也是随机变量。我们使用$\mathbb{E}(Y)$表示常规的期望。 令域流$\mathcal{F}_n$为随机变量$X_1,\ldots,X_n$中的信息，则$E(Y\vert X_1,\ldots,X_n)&#x3D;E({Y\vert \mathcal{F}_n})$。当知道信息时，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="a">
-<meta property="og:url" content="http://example.com/2021/08/15/a/index.html">
+<meta property="og:title" content="随机分析 No.1 - 条件期望">
+<meta property="og:url" content="http://example.com/2021/08/15/stochastic1/index.html">
 <meta property="og:site_name" content="时代精神">
-<meta property="og:description" content="default_layout default">
+<meta property="og:description" content="条件期望简言之，条件期望是对随机变量$Y$给定条件（随机变量）$X$时最好的猜测。记作$E(Y|X)$。显然，$Y$本身也是随机变量。我们使用$\mathbb{E}(Y)$表示常规的期望。 令域流$\mathcal{F}_n$为随机变量$X_1,\ldots,X_n$中的信息，则$E(Y\vert X_1,\ldots,X_n)&#x3D;E({Y\vert \mathcal{F}_n})$。当知道信息时，">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-08-14T16:42:21.000Z">
-<meta property="article:modified_time" content="2021-08-19T10:23:39.579Z">
+<meta property="article:modified_time" content="2021-08-21T10:39:25.017Z">
 <meta property="article:author" content="Lucas Liu">
 <meta name="twitter:card" content="summary">
 
@@ -68,7 +68,7 @@
 
 
 
-    <title> a - 时代精神 </title>
+    <title> 随机分析 No.1 - 条件期望 - 时代精神 </title>
   <meta name="generator" content="Hexo 5.4.0"></head>
 
   <body>
@@ -114,7 +114,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          a
+          随机分析 No.1 - 条件期望
         
       </h1>
 
@@ -127,8 +127,17 @@
 
     
             <div class="post-content">
-            <p>default_layout</p>
-<h1 id="default"><a href="#default" class="headerlink" title="default"></a>default</h1>
+            <h1 id="条件期望"><a href="#条件期望" class="headerlink" title="条件期望"></a>条件期望</h1><p>简言之，条件期望是对随机变量$Y$给定条件（随机变量）$X$时最好的猜测。记作$E(Y|X)$。显然，$Y$本身也是随机变量。我们使用$\mathbb{E}(Y)$表示常规的期望。</p>
+<p>令域流$\mathcal{F}_n$为随机变量$X_1,\ldots,X_n$中的信息，则$E(Y\vert X_1,\ldots,X_n)=E({Y\vert \mathcal{F}_n})$。当知道信息时，可以确认$Y$的唯一值时，我们称$E({Y\vert \mathcal{F}_n})$为$\mathcal{F}_n$可测的。当我们没有信息时，$E(Y|\mathcal{F}_0)=\mathbb{E}(Y)$</p>
+<p>条件期望$E({Y\vert \mathcal{F}_n})$具有如下性质：</p>
+<ul>
+<li>若$Y$是$\mathcal{F}_n$可测的，则$E({Y\vert \mathcal{F}_n})=Y$。</li>
+<li>若$Y$独立于$ X_1,\ldots,X_n$，显然知道${X_n}$的信息无益于猜测$Y$的值。即$E({Y\vert \mathcal{F}_n})=\mathbb{E}(Y)$。</li>
+<li>Law of Iterated Expecations：$\mathbb{E}(E({Y\vert \mathcal{F}_n}))=\mathbb{E}(Y)$；设想计算某年级学生成绩$X$的平均分，可以加总所有成绩并除以人数，即$\mathbb{E}(X)$，也可也按照班级或者性别等信息$Y$先平均各班级内，再平均各班级。即$\mathbb{E}(E(X\vert Y))$。显然两种方法得到的成绩平均分相等。</li>
+<li>Linearity：$E[aY+bZ\vert{\mathcal{F}_n}]=aE(Y|\mathcal{F}_n)+bE(Z|\mathcal{F}_n)$。常数$a$和$b$可以扩展至任意$\mathcal{F}_n$可测的随机变量。</li>
+<li>Tower/Projection Property：若$n&gt;m$，则$E[E(Y|\mathcal{F}_n)\vert\mathcal{F}_m]=E[Y|\mathcal{F}_m]$。这条性质是Law of Iterated Expecations的推广：我们将原来的$\mathcal{F}_0$推广至$\mathcal{F}_m$。</li>
+</ul>
+
             </div>
           
 
@@ -140,12 +149,6 @@
         
   <nav class="post-nav">
     
-    
-      <a class="next" href="/2021/08/15/test/">
-        <span class="next-text nav-default">test</span>
-        <span class="prev-text nav-mobile">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
     
   </nav>
 
