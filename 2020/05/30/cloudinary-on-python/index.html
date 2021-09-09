@@ -21,28 +21,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":".public/search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yihong&#39;s Whiteboard">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Python上传文件到Cloudinary的CDN服务">
+<meta property="og:url" content="http://example.com/2020/05/30/cloudinary-on-python/index.html">
 <meta property="og:site_name" content="Yihong&#39;s Whiteboard">
+<meta property="og:description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-30T09:21:16.000Z">
+<meta property="article:modified_time" content="2021-09-09T10:31:22.742Z">
 <meta property="article:author" content="Yihong Liu">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2020/05/30/cloudinary-on-python/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Yihong's Whiteboard</title>
+  <title>使用Python上传文件到Cloudinary的CDN服务 | Yihong's Whiteboard</title>
   
 
 
@@ -170,77 +174,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/08/15/stochastic1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Yihong Liu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yihong's Whiteboard">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/15/stochastic1/" class="post-title-link" itemprop="url">随机分析笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-08-15 00:42:21" itemprop="dateCreated datePublished" datetime="2020-08-15T00:42:21+08:00">2020-08-15</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="条件期望">条件期望</h1>
-<h2 id="定义">1. 定义</h2>
-<p>简言之，条件期望是对随机变量<span class="math inline">\(Y\)</span>给定条件（随机变量）<span class="math inline">\(X\)</span>时最好的猜测.记作<span class="math inline">\(E(Y|X)\)</span>.显然，<span class="math inline">\(Y\)</span>本身也是随机变量.我们使用<span class="math inline">\(\mathbb{E}(Y)\)</span>表示常规的期望.</p>
-<p>令域流<span class="math inline">\(\mathcal{F}_n\)</span>为随机变量<span class="math inline">\(X_1,\ldots,X_n\)</span>中的信息，则<span class="math inline">\(E(Y\vert X_1,\ldots,X_n)=E({Y\vert \mathcal{F}_n})\)</span>.当知道信息时，可以确认<span class="math inline">\(Y\)</span>的唯一值时，我们称<span class="math inline">\(E({Y\vert \mathcal{F}_n})\)</span>为<span class="math inline">\(\mathcal{F}_n\)</span>可测的.当我们没有信息时，<span class="math inline">\(E(Y|\mathcal{F}_0)=\mathbb{E}(Y)\)</span>.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/stochastic1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -256,10 +193,9 @@
       <meta itemprop="name" content="Yihong's Whiteboard">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/30/cloudinary-on-python/" class="post-title-link" itemprop="url">使用Python上传文件到Cloudinary的CDN服务</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          使用Python上传文件到Cloudinary的CDN服务
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -282,30 +218,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件：
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/30/cloudinary-on-python/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件： <span id="more"></span></p>
+<h1 id="安装cloudinary">安装cloudinary</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cloudinary</span><br></pre></td></tr></table></figure>
+<h1 id="加载modules">加载modules</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cloudinary</span><br><span class="line"><span class="keyword">import</span> cloudinary.uploader</span><br><span class="line"><span class="keyword">import</span> cloudinary.api</span><br></pre></td></tr></table></figure>
+<h1 id="配置cloudinary">配置cloudinary</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cloudinary.config(</span><br><span class="line">  cloud_name = <span class="string">&quot;&quot;</span>,</span><br><span class="line">  api_key = <span class="string">&quot;&quot;</span>,</span><br><span class="line">  api_secret = <span class="string">&quot;&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h1 id="上传文件">上传文件</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 也可也从本地上传</span></span><br><span class="line">cloudinary.uploader.upload(<span class="string">rf&quot;https://en.wikipedia.org/wiki/File:LagrangeMultipliers2D.svg&quot;</span>,</span><br><span class="line">  public_id = <span class="string">&quot;lm_wiki&quot;</span>)</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/15/stochastic1/" rel="next" title="随机分析笔记">
+      随机分析笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -358,6 +304,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85cloudinary"><span class="nav-number">1.</span> <span class="nav-text">安装cloudinary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BDmodules"><span class="nav-number">2.</span> <span class="nav-text">加载modules</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEcloudinary"><span class="nav-number">3.</span> <span class="nav-text">配置cloudinary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">上传文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
