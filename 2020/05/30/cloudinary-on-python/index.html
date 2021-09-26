@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：">
+  <meta name="description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：   安装cloudinary  加载modules  配置cloudinary  上传文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Python上传文件到Cloudinary的CDN服务">
 <meta property="og:url" content="http://example.com/2020/05/30/cloudinary-on-python/index.html">
 <meta property="og:site_name" content="Yihong&#39;s Whiteboard">
-<meta property="og:description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：">
+<meta property="og:description" content="以Python为例，使用Cloudinary提供的免费CDN服务上传文件：   安装cloudinary  加载modules  配置cloudinary  上传文件">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-30T09:21:16.000Z">
 <meta property="article:modified_time" content="2021-09-09T14:39:40.429Z">
@@ -219,15 +219,16 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件： <span id="more"></span></p>
-<h1 id="安装cloudinary">安装cloudinary</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cloudinary</span><br></pre></td></tr></table></figure>
-<h1 id="加载modules">加载modules</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cloudinary</span><br><span class="line"><span class="keyword">import</span> cloudinary.uploader</span><br><span class="line"><span class="keyword">import</span> cloudinary.api</span><br></pre></td></tr></table></figure>
-<h1 id="配置cloudinary">配置cloudinary</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cloudinary.config(</span><br><span class="line">  cloud_name = <span class="string">&quot;&quot;</span>,</span><br><span class="line">  api_key = <span class="string">&quot;&quot;</span>,</span><br><span class="line">  api_secret = <span class="string">&quot;&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<h1 id="上传文件">上传文件</h1>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 也可也从本地上传</span></span><br><span class="line">cloudinary.uploader.upload(<span class="string">rf&quot;https://en.wikipedia.org/wiki/File:LagrangeMultipliers2D.svg&quot;</span>,</span><br><span class="line">  public_id = <span class="string">&quot;lm_wiki&quot;</span>)</span><br></pre></td></tr></table></figure>
+        <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件：</p>
+
+
+<h1 id="安装cloudinary"><a title="安装cloudinary" class="headerlink" href="#安装cloudinary"></a>安装cloudinary</h1>
+
+<h1 id="加载modules"><a title="加载modules" class="headerlink" href="#加载modules"></a>加载modules</h1>
+
+<h1 id="配置cloudinary"><a title="配置cloudinary" class="headerlink" href="#配置cloudinary"></a>配置cloudinary</h1>
+
+<h1 id="上传文件"><a title="上传文件" class="headerlink" href="#上传文件"></a>上传文件</h1>
 
     </div>
 

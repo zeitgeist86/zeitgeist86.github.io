@@ -214,15 +214,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Intel® oneAPI toolkit提供了高性能计算的高级架构，让使用者可以自由使用加速工具而不用担心底层架构。例如，当我们想使用多线程加速蒙特卡洛模拟时，常常无法选出最佳的线程数与线程任务。Intel® oneAPI很好的解决了上述问题。本文描述如何在Windows操作系统的Visual Studio C++中使用Intel® oneAPI。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/19/oneapi/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>Intel® oneAPI toolkit提供了高性能计算的高级架构，让使用者可以自由使用加速工具而不用担心底层架构。例如，当我们想使用多线程加速蒙特卡洛模拟时，常常无法选出最佳的线程数与线程任务。Intel® oneAPI很好的解决了上述问题。本文描述如何在Windows操作系统的Visual Studio C++中使用Intel® oneAPI。</p>
+
+
+<h1 id="1-下载工具包"><a title="1 下载工具包" class="headerlink" href="#1-下载工具包"></a>1 下载工具包</h1><p>下载并按顺序安装Intel® oneAPI toolkit和Intel® oneAPI HPC toolkit，链接如下：<br><a target="_blank" rel="noopener" href="https://software.intel.com/content/www/us/en/develop/tools/oneapi/all-toolkits.html#hpc-kit">https://software.intel.com/content/www/us/en/develop/tools/oneapi/all-toolkits.html#hpc-kit</a><br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631197131/oneapidld.jpg"></p>
+<h1 id="2-Visual-Studio环境配置"><a title="2 Visual Studio环境配置" class="headerlink" href="#2-Visual-Studio环境配置"></a>2 Visual Studio环境配置</h1><p>打开任意Visual Studio C++ project，在Property Pages中按照下图配置Intel Libraries for oneAPI，在Project -&gt; Inter Compiler中选择Classic（推荐）：<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631197444/oneapi_pic2.png"><br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631197531/oneapi_pic3.jpg"><br>截至写作时最新intel C++ compiler classic version为19.2。<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631197574/oneapi_pic4.jpg"></p>
+<h1 id="3-代码示例"><a title="3 代码示例" class="headerlink" href="#3-代码示例"></a>3 代码示例</h1><p>下面的例子使用蒙特卡洛法模拟圆周率$\pi$。我们使用mkl（math kernel library）和tbb（threading building blocks）两个library。<br>其中mkl可以加速数学浮点运算与向量化生成随机数，tbb负责智能化线程分配。</p>
+
+
+<h1 id="4-Hotstop-Analysis"><a title="4 Hotstop Analysis" class="headerlink" href="#4-Hotstop-Analysis"></a>4 Hotstop Analysis</h1><p>Intel® oneAPI toolkit中的VTune Profiler可以进行hotspot analysis。可以直接打开VTune Profiler GUI进行分析：<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631198151/oneapi_pic5.jpg"><br>或者直接在Visual Studio中进行：<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631198254/oneapi_pic7.png"></p>
+<h1 id="5-报错解决"><a title="5. 报错解决" class="headerlink" href="#5-报错解决"></a>5. 报错解决</h1><p>某些步骤的报错可以通过reinstall/repair toolkit解决，暂时没有更好的解决方法。</p>
+
       
     </div>
 
@@ -279,16 +281,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="开发目的">1 开发目的</h1>
-<p>在<code>wechaty-puppet-wechat</code>支持UOS微信桌面版协议登录后，我们可以重新使用基于web协议的免费WeChaty机器人。与其他机器人框架比较，<code>wechaty</code>会随微信桌面版本变化而更新。笔者在已有的高并发iPad协议机器人框架上更新依赖，成功启动桌面版微信机器人。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/02/wechatbot/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="1-开发目的"><a title="1 开发目的" class="headerlink" href="#1-开发目的"></a>1 开发目的</h1><p>在<code>wechaty-puppet-wechat</code>支持UOS微信桌面版协议登录后，我们可以重新使用基于web协议的免费WeChaty机器人。与其他机器人框架比较，<code>wechaty</code>会随微信桌面版本变化而更新。笔者在已有的高并发iPad协议机器人框架上更新依赖，成功启动桌面版微信机器人。</p>
+
+
+<h1 id="2-Requirements"><a title="2 Requirements" class="headerlink" href="#2-Requirements"></a>2 Requirements</h1><p><code>wechaty &gt;= 0.4.1</code> and/or <code>docker &gt;= 20.10.6</code><br><br><code>node &gt;= 12.0</code><br><br><code>Python &gt;= 3.7</code></p>
+<h1 id="3-环境配置"><a title="3 环境配置" class="headerlink" href="#3-环境配置"></a>3 环境配置</h1><h2 id="3-1-使用Docker配置wechaty"><a title="3.1 使用Docker配置wechaty" class="headerlink" href="#3-1-使用Docker配置wechaty"></a>3.1 使用Docker配置wechaty</h2><p>Docker是官方唯一推荐的容器，在某个<code>Wechaty</code>版本后成为唯一指定的稳定版本。在安装好Docker之后，运行</p>
+
+<p>需要确保TAG始终为latest。<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631194105/docker_wechaty.jpg"></p>
+<h2 id="3-2-配置环境变量"><a title="3.2 配置环境变量" class="headerlink" href="#3-2-配置环境变量"></a>3.2 配置环境变量</h2><p>在<code>wechaty/wechaty</code>根目录下配置。注意使用空端口，这里选择9222。</p>
+
+
+<h2 id="3-3-配置Python环境变量"><a title="3.3 配置Python环境变量" class="headerlink" href="#3-3-配置Python环境变量"></a>3.3 配置Python环境变量</h2><p>下载python-wechaty：</p>
+
+
+<p>领取PadLocal token: <a target="_blank" rel="noopener" href="http://pad-local.com/#/login">http://pad-local.com/#/login</a></p>
+<p>若部署于外网服务器上，请跳过对<code>WECHATY_PUPPET_SERVICE_ENDPOINT</code>的配置。</p>
+
+
+<h2 id="3-4-使用AsyncIOScheduler实现异步"><a title="3.4 使用AsyncIOScheduler实现异步" class="headerlink" href="#3-4-使用AsyncIOScheduler实现异步"></a>3.4 使用AsyncIOScheduler实现异步</h2><p>核心代码如下：</p>
+
+
+<h2 id="3-5-按实际需求加入多线程，继续测试并发性"><a title="3.5 按实际需求加入多线程，继续测试并发性" class="headerlink" href="#3-5-按实际需求加入多线程，继续测试并发性"></a>3.5 按实际需求加入多线程，继续测试并发性</h2><p>我们选择在这里同时生成文件。</p>
+
+
+<h2 id="3-6-测试"><a title="3.6 测试" class="headerlink" href="#3-6-测试"></a>3.6 测试</h2><p>以10秒为间隔测试respond，以5秒为间隔测试文件发送。机器人能获取到所有event并发出相应反馈。机器人的sender只能单线程处理任务，故计时器会在发送文档的间隙发送时间，即21:06:12+00:00:05*2+00:00:10≈21:06:33。<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631194124/wechaty1.png"><br>测试其他类型文件：<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631194128/wechaty2.png"></p>
+<h1 id="4-基于最新web协议的机器人"><a title="4 基于最新web协议的机器人" class="headerlink" href="#4-基于最新web协议的机器人"></a>4 基于最新web协议的机器人</h1><p>更新依赖：</p>
+
+
+<p>删除根目录下的<code>wechaty-puppet-wechat.memory-card.json</code>。</p>
+<p>最后，类比3.2中的配置，更换<code>WECHATY_PUPPET</code>：</p>
+
+
       
     </div>
 
@@ -345,18 +368,128 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="条件期望">条件期望</h1>
-<h2 id="定义">1. 定义</h2>
-<p>简言之，条件期望是对随机变量<span class="math inline">\(Y\)</span>给定条件（随机变量）<span class="math inline">\(X\)</span>时最好的猜测.记作<span class="math inline">\(E(Y|X)\)</span>.显然，<span class="math inline">\(Y\)</span>本身也是随机变量.我们使用<span class="math inline">\(\mathbb{E}(Y)\)</span>表示常规的期望.</p>
-<p>令域流<span class="math inline">\(\mathcal{F}_n\)</span>为随机变量<span class="math inline">\(X_1,\ldots,X_n\)</span>中的信息，则<span class="math inline">\(E(Y\vert X_1,\ldots,X_n)=E({Y\vert \mathcal{F}_n})\)</span>.当知道信息时，可以确认<span class="math inline">\(Y\)</span>的唯一值时，我们称<span class="math inline">\(E({Y\vert \mathcal{F}_n})\)</span>为<span class="math inline">\(\mathcal{F}_n\)</span>可测的.当我们没有信息时，<span class="math inline">\(E(Y|\mathcal{F}_0)=\mathbb{E}(Y)\)</span>.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/stochastic1/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="条件期望"><a title="条件期望" class="headerlink" href="#条件期望"></a>条件期望</h1><h2 id="1-定义"><a title="1. 定义" class="headerlink" href="#1-定义"></a>1. 定义</h2><p>简言之，条件期望是对随机变量$Y$给定条件（随机变量）$X$时最好的猜测.记作$E(Y|X)$.显然，$Y$本身也是随机变量.我们使用$\mathbb{E}(Y)$表示常规的期望.</p>
+<p>令域流$\mathcal{F}_n$为随机变量$X_1,\ldots,X_n$中的信息，则$E(Y\vert X_1,\ldots,X_n)=E({Y\vert \mathcal{F}_n})$.当知道信息时，可以确认$Y$的唯一值时，我们称$E({Y\vert \mathcal{F}_n})$为$\mathcal{F}_n$可测的.当我们没有信息时，$E(Y|\mathcal{F}_0)=\mathbb{E}(Y)$.</p>
+
+
+<h2 id="2-性质"><a title="2. 性质" class="headerlink" href="#2-性质"></a>2. 性质</h2><p>条件期望$E({Y\vert \mathcal{F}_n})$具有如下性质：</p>
+<ul>
+<li>若$Y$是$\mathcal{F}_n$可测的，则$E({Y\vert \mathcal{F}_n})=Y$.</li>
+<li>若$Y$独立于$X_1,\ldots,X_n$，显然知道${X_n}$的信息无益于猜测$Y$的值.即$E({Y\vert \mathcal{F}_n})=\mathbb{E}(Y)$.</li>
+<li><strong>Law of Iterated Expecations</strong>：$\mathbb{E}(E({Y\vert \mathcal{F}_n}))=\mathbb{E}(Y)$；设想计算某年级学生成绩$X$的平均分，可以加总所有成绩并除以人数，即$\mathbb{E}(X)$，也可也按照班级或者性别等信息$Y$先平均各班级内，再平均各班级.即$\mathbb{E}(E(X\vert Y))$.显然两种方法得到的成绩平均分相等.</li>
+<li>Linearity：$E[aY+bZ\vert{\mathcal{F}_n}]=aE(Y|\mathcal{F}_n)+bE(Z|\mathcal{F}_n)$.常数$a$和$b$可以扩展至任意$\mathcal{F}_n$可测的随机变量.</li>
+<li>Tower/Projection Property：若$n&gt;m$，则$E[E(Y|\mathcal{F}_n)\vert\mathcal{F}_m]=E[Y|\mathcal{F}_m]$.这条性质是Law of Iterated Expecations的推广：我们将原来的$\mathcal{F}_0$推广至$\mathcal{F}_m$.</li>
+</ul>
+<h1 id="鞅"><a title="鞅" class="headerlink" href="#鞅"></a>鞅</h1><h2 id="1-定义-1"><a title="1. 定义" class="headerlink" href="#1-定义-1"></a>1. 定义</h2><p>一个随机变量序列$M_0, M_1,\ldots$是一个关于域流$\mathcal{F_n}$的鞅（Martingale），如果</p>
+<ul>
+<li>$\forall j, \mathbb{E}(|M_j|)&lt;\infty$；</li>
+<li>鞅性：$\forall{n&lt;m}, E(M_n|\mathcal{F}<em>m)=M_n$. 等价于$E(M</em>{n+1}-M_n|\mathcal{F}<em>n)=0$.特别地，当$E(M</em>{n+1}-M_n|\mathcal{F}_n)\geq 0$时，称为下鞅（submartingale），反之成为上鞅（supermartingale）.</li>
+</ul>
+<p><strong>概括一下，鞅认为对明天最好的猜测就是今天已知的值.</strong></p>
+<h2 id="2-性质-1"><a title="2. 性质" class="headerlink" href="#2-性质-1"></a>2. 性质</h2><p>鞅可以被定义在离散的时间上，也可也定义在连续的时间上.</p>
+<p>由于鞅性，我们认为鞅是"公平的游戏"（fair game）. <em>You cannot beat a fair game!</em></p>
+<p>&lt;code style="color:white; background-color: #800000&gt;Example $x_1, x_2,\ldots$ are i.i.d. r.v.s. $\mathbb{E}(X_j)=0$. Let $M_n=x_1+\ldots+x_n$, then $M_n$ is a martingale w.r.t. $\mathcal{F}_n$.</p>
+<h1 id="鞅与停时"><a title="鞅与停时" class="headerlink" href="#鞅与停时"></a>鞅与停时</h1><h2 id="1-停时与公平的策略"><a title="1. 停时与公平的策略" class="headerlink" href="#1-停时与公平的策略"></a>1. 停时与公平的策略</h2><p>事实上，上文的“You cannot beat a fair game!”有更精确的表述：</p>
+<blockquote>
+<p><strong>You cannot beat a fair game with a fair strategy!</strong></p>
+</blockquote>
+<p>这里的“fair game”是鞅，而“fair strategy”指的是<strong>停时</strong>（stopping time）.</p>
+<p>考虑如下游戏：</p>
+<p><code style="color:white; background-color: #800000">Example</code> Martingale Betting Strategy</p>
+<p>赌博n元，通过抛硬币的正反面决定输赢.若正面，赢n元，反之输n元.</p>
+<p>显然这个游戏的收益是鞅，但我们仍然有稳赢的策略：<br><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631179029/sto_gambler_ruin.png"><br>只要游戏一直进行下去，我们总能以$+1$元的收益结束游戏.</p>
+<p>我们似乎赢了一场公平的游戏，但唯一的问题是，我们用了不公平的策略.若游戏<strong>不能一直进行，显然我们不会一直赢得游戏</strong>.这便是“停时”不太精确的定义，也就是上文所述“公平”的策略.</p>
+<h2 id="2-可选样本定理"><a title="2. 可选样本定理" class="headerlink" href="#2-可选样本定理"></a>2. 可选样本定理</h2><p>下面我们引出 <strong>(Doob's) Optional Sampling/Stopping Theorem</strong>：</p>
+<p>若$M_0,M_1,M_2,\ldots$是关于$\mathcal{F}_0,\mathcal{F}_1,\mathcal{F}<em>2,\ldots$<br>的鞅，$T$是停时，且令$\tilde{M}<em>n:=M</em>{n\wedge{T}}:=M</em>{\min{n,T}}$，则$\tilde{M_n}$是鞅，且$\mathbb{E}(\tilde{M}_n)=\mathbb{E}(M_0)$.</p>
+<h1 id="布朗运动"><a title="布朗运动" class="headerlink" href="#布朗运动"></a>布朗运动</h1><h2 id="1-定义-2"><a title="1. 定义" class="headerlink" href="#1-定义-2"></a>1. 定义</h2><p>布朗运动（Brownian motion）可以被视为随机游走的“极限”，也就是连续的随机运动.用$B_t$指代在时间$t$时到达的位置.布朗运动在金融中也被称为维纳过程$W_t$（Wiener process）.</p>
+<p>带有<strong>漂移</strong>（drift）$m$和<strong>波动</strong>（volatility）$\sigma$的一维布朗运动被定义为：</p>
+<ul>
+<li>$B_0=0$.</li>
+<li><strong>Independent increments</strong>：若$s&lt; t$，则$B_t-B_s$独立于${B_r:r\leq{s}}$.</li>
+<li>Stationary/<strong>Indentically distributed increments</strong>：若$s&lt; t$，则$B_t-B_s$与$B_{t-s}-B_0$同分布. 该分布为$B_t-B_s\sim{N(m(t-s),\sigma^2(t-s))}$. 特别的，当$m=0, \sigma=1$时为标准布朗运动.</li>
+<li><strong>Continuity</strong>：$B_t$是$t$的连续函数.</li>
+</ul>
+<h2 id="2-性质-2"><a title="2. 性质" class="headerlink" href="#2-性质-2"></a>2. 性质</h2><p>一维布朗运动有如下性质：</p>
+<ul>
+<li>矩：$\mathbb{E}(B_t)=\mathbb{E}(B_s+B_t-B_s)=\mathbb{E}(B_s)+\mathbb{E}(B_{t-s}),$<br>$\text{Var}(B_t)=\text{Var}(B_s+B_t-B_s)=\text{Var}({B_s})+\text{Var}(B_{t-s}).$<br><br>特别地，若$s\leq t$，对于<strong>协方差</strong>，我们有<br><br>$\text{Cov}(B_s,B_t)=\mathbb{E}(B_sB_t)=\mathbb{E}(B_s(B_s+B_t-B_s))=s=s\wedge{t}$<br></li>
+<li>若$B_t$是标准布朗运动，则$Y_t=mt+\sigma{B_t}$为具有漂移$m$和波动$\sigma$的布朗运动.</li>
+<li><strong>布朗运动处处不可导.</strong> 直觉地，对于普通$C^1$连续性的函数而言，某点的导数取决于它的“过去”：$f'(x)=\frac{f(x)-f(\Delta x)}{\Delta x}$.然而，布朗运动的“过去”与“现在”独立，故布朗运动处处不可导，只有$C^0$连续性.</li>
+<li><strong>标准布朗运动是连续鞅.</strong></li>
+<li>布朗运动是马尔可夫过程，也是高斯过程.</li>
+<li>放缩（scaling）：若$B_t$是一个标准布朗运动，令$a&gt;0$，则$Y_t=\frac{1}{\sqrt{a}}B_{at}$也是一个标准布朗运动.</li>
+<li><strong>Strong Markov Property</strong>：若$T$是停时且$\mathbb{P}({T&lt; \infty})=1$（一定停）,则$Y_t=B_{T+t}-B_T$是标准布朗运动，且$Y$独立于${B_t:0\leq{t}\leq{T}}$.</li>
+<li><strong>Reflection Property</strong>（反射原理）：</li>
+</ul>
+<p>$$<br>\begin{aligned}<br>    \mathbb{P}\left{\text{布朗运动在时间}t\text{前抵达}a\right}&amp;= \mathbb{P}\left{\max_{0\leq s \leq t}B_s\geq a\right} \<br>    &amp;= 2\left[1-\Phi\left(\frac{a}{\sqrt{t}}\right)\right]<br>\end{aligned}<br>$$</p>
+<p><code style="color:white; background-color: #800000">Example</code> 证明反射定理：</p>
+<p>Compute $\mathbb{P}\left{ {B_t\geq a}\right}$ first. This is the probability of exceeding $a$ at time $t$.</p>
+<p>We know that $B_t\sim N(0,t)$，so $\sqrt{t}B_1\sim N(0,t)$.</p>
+<p>From the same distribution of $N(0,t)$, we have</p>
+<p>$$<br>\begin{aligned}<br>\mathbb{P}\left{B_t\geq a\right}&amp;= \mathbb{P}\left{\sqrt{t}{B_1\geq a}\right} \<br>                       &amp;= \mathbb{P}\left{B_1\geq\frac{a}{\sqrt{t} }\right} \<br>                       &amp;= 1-\Phi\left(\frac{a}{\sqrt{t} }\right).<br>\end{aligned}<br>$$</p>
+<p>Using strong Markov property, we have<br>$$\mathbb{P}\left{B_t\geq{a}\vert\max_{0\leq s\leq t}\right}= \frac{1}{2}$$</p>
+<p>Let $T_a=\min{s:B_s\geq a}=\min{s:B_s=a}$, which is the first time BM reaches $a$. The second equality holds because $B_s$ is continuous and $B_0=0$.<br></p>
+<p>The probability we want to calculate can then be paraphrase as<br>$$\mathbb{P}\left{\max_{0\leq s \leq t}B_s\geq a\right}=\mathbb{P}\left{T_a\leq t\right}=\mathbb{P}\left{T_a&lt; t\right}.$$</p>
+<p>Obviously $B_{T_a}=a$, then<br>$$<br>\begin{aligned}<br>\mathbb{P}\left{B_t&gt; a\right}&amp;=\mathbb{P}\left{\max_{0\leq s \leq t}B_s\geq a, B_t&gt; a\right}\<br>&amp;=\mathbb{P}\left{T_a&lt; t, B_t&gt; B_{T_a}\right}\<br>&amp;=\mathbb{P}{T_a&lt; t}\mathbb{P}\left{B_t-B_{T_a}&gt; 0|T_a&lt; t\right}.<br>\end{aligned}<br>$$<br>Using strong Markov property, we know that $B_t-B_{T_a}$ is also a standard Brownian motion. We denote the new Brownian motion as $Y_t$.</p>
+<p>Then</p>
+<p>$$<br>\mathbb{P}\left{B_t-B_{T_a}&gt; 0|T_a&lt; t\right}=\mathbb{P}{Y_t&gt; 0}=1-\Phi\left(\frac{0}{\sqrt{t}}\right)=\frac{1}{2}.<br>$$<br>Plug the conditional probability back, we have<br>$$<br>\mathbb{P}{T_a&lt; t}=\frac{\mathbb{P}{B_t&gt; a} }{\frac{1}{2} }=2\left[1-\Phi\left(\frac{a}{\sqrt{t} }\right)\right].<br>$$</p>
+<h2 id="3-布朗运动的模拟"><a title="3. 布朗运动的模拟" class="headerlink" href="#3-布朗运动的模拟"></a>3. 布朗运动的模拟</h2><p>标准布朗运动的计算机模拟如下，其他布朗运动可由性质一节中第二条获得：</p>
+
+
+<p><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1631179055/sto_bm.png"></p>
+<p>我们在模拟中使用了$\Delta{x}=\sqrt{\Delta{t}}$，其中$\Delta{x}$为布朗运动的增量，$\Delta{t}$为时间的增量.在第四节中我们将对这一结论给出严格证明.</p>
+<h2 id="4-二阶变差"><a title="4. 二阶变差" class="headerlink" href="#4-二阶变差"></a>4. 二阶变差</h2><p>考虑一个标准布朗运动$B_t$，将时间等分为间隔为$\frac{1}{n}$的区间$B_{\frac{1}{n}},B_{\frac{2}{n}},\ldots,B_{\frac{n-1}{n}},1$.</p>
+<p>定义$Y_{1,n},\ldots,Y_{n,n}$为独立增量的平方：<br>$$Y_{j,n}=\left(B_{\frac{1}{n}}\right)^2$$</p>
+<p>则$Y_{j,n}$与$\left(B_{\frac{1}{n}}\right)^2$同分布.又因为$\left(B_{\frac{1}{n}}\right)^2$与$\left(\frac{1}{\sqrt{n}}B_1\right)^2$同分布，故<br>$$Y_{j,n}=\left(\frac{1}{\sqrt{n}}B_1\right)^2$$</p>
+<p>定义$Q_n$为<br>$$Q_n=\sum_{j=1}^n \left[B_{\frac{j}{n}}-B_{\frac{j-1}{n}}\right]^2=\sum_{j=1}^n Y_{j,n}.$$</p>
+<p>下面计算$Q_n$的<strong>期望</strong>：<br>$$<br>\begin{aligned}<br>\mathbb{E}(Q_n)&amp;=\mathbb{E}(\sum_{j=1}^n Y_{j,n})\<br>&amp;=\sum_{j=1}^n \mathbb{E}\left[\left(\frac{1}{\sqrt{n}}B_1\right)^2\right]\<br>&amp;=\frac{1}{n}\sum_{j=1}^n\mathbb{E}(B_1^2)\<br>&amp;=\frac{1}{n}\cdot{n}\cdot{1}\<br>&amp;=1<br>\end{aligned}<br>$$<br>计算$Q_n$的<strong>方差</strong>，先计算$\text{Var}(Y_{j,n})$：</p>
+<p>$$<br>\begin{aligned}<br>\text{Var}(Y_{j,n})&amp;=\mathbb{E}(Y_{j,n}^2)-\left[\mathbb{E}(Y_{j,n})\right]^2\<br>&amp;=\mathbb{E}\left[\left(\left(\frac{1}{\sqrt{n}}B_1\right)^2\right)^2\right]-\left[\mathbb{E}\left(\frac{1}{\sqrt{n}}B_1\right)^2\right]^2\<br>&amp;=\frac{1}{n^2}\mathbb{E}(B_1^4)-\frac{1}{n^2}[\mathbb{E}(B_1^2)]^2\<br>&amp;=\frac{1}{n^2}\cdot{3}-\frac{1}{n^2}\<br>&amp;=\frac{2}{n^2}<br>\end{aligned}<br>$$</p>
+<p>由于$Y_{j,n}$互相独立，根据方差的独立可加性：<br>$$<br>\begin{aligned}<br>\text{Var}(Q_n)&amp;=\sum_{j=1}^n\text{Var}(Y_{j,n})\<br>&amp;=n\cdot\frac{2}{n^2}\<br>&amp;=\frac{2}{n}<br>\end{aligned}<br>$$</p>
+<p>随着$n\to\infty$，$\mathbb{E}(Q_n)=1$，$\text{Var}(Q_n)=0$.</p>
+<p>现在可以定义过程$X_t$的二阶变差（quadratic variation）</p>
+<p>$$\left\langle X\right\rangle_t:=\lim_{n\to\infty}\sum_{j\leq{tn}}\left[X_{\frac{j}{n}}-X_{\frac{j-1}{n}}\right]^2$$</p>
+<p>上面的结论说明标准布朗运动的二阶变差是一个常过程：变差期望为常数，变差方差为$0$.即$\langle{B}\rangle_t=t$.</p>
+<p>到此，我们给出了标准布朗运动$(\Delta{x})^2=\Delta{t}$性质的证明.</p>
+<p>容易验证对于一般的布朗运动<span style="color:blue">$Y_t=mt+\sigma B_t$，$\langle{Y}\rangle_t=\sigma^2t$.</span><br>这说明了布朗运动一条重要的性质：布朗运动的二阶变差并非随机过程，并且只依赖于过程的方差$\sigma^2$.</p>
+<h2 id="5-热方程"><a title="5. 热方程" class="headerlink" href="#5-热方程"></a>5. 热方程</h2><p>定义$P_t(x)$为标准布朗运动在$t$时刻的概率密度函数.根据定义，我们有<br>$$P_t(x)=\frac{1}{\sqrt{2\pi{t}}}e^{-\frac{x^2}{2t}}.$$</p>
+<p>根据二叉树的近似，我们有$P_{t+\Delta{t}}(x)=\frac{1}{2}P_t(x-\Delta{x})+\frac{1}{2}P_t(x+\Delta{x})$.<br>所以$P_t(x)$关于$t$的偏导数可以写成<br>$$\partial_t{P_t}(x)=\frac{P_{t+\Delta{t}}(x)-P_t(x)}{\Delta{t}}=\frac{P_t(x+\Delta{x})+P_t(x-\Delta{x})-2P_t(x)}{2(\Delta{x})^2}$$</p>
+<p>令$f(x)=P_t(x)$.根据泰勒级数展开，我们有<br>$$<br>\begin{aligned}<br>f(x+\epsilon)=f(x)+f'(x)\epsilon+\frac{1}{2}f''(x)\epsilon^2+o(\epsilon^2)\<br>f(x-\epsilon)=f(x)-f'(x)\epsilon+\frac{1}{2}f''(x)\epsilon^2+o(\epsilon^2)\<br>\end{aligned}<br>$$<br>且<br>$$<br>f(x+\epsilon)+f(x-\epsilon)-2f(x)=f''(x)\epsilon^2+o(\epsilon^2)=\partial_{xx}P_t(x).<br>$$</p>
+<p>所以$\frac{P_t(x+\Delta{x})+P_t(x-\Delta{x})-2P_t(x)}{2(\Delta{x})^2}=\partial_{xx}P_t(x)$，<br>即$$\partial_t P_t(x)=\frac{1}{2}\partial{xx}P_t(x).$$</p>
+<p>上式可扩展至任意方差$\sigma^2.</p>
+<p>当漂移$m\neq 0$，$\sigma^2=0$，我们有如下关系<br>$$P_{t+\Delta{t}}(x)=P_t(x-m\Delta{t})$$</p>
+<p>且<br>$$-m\partial_xP_t(x)=m\cdot\frac{P_t(x-m\Delta{t})-P_t(x)}{m\Delta{t}}$$</p>
+<p>综上，若$B_t$是带有漂移$m$和方差$\sigma^2$的布朗运动，则概率密度函数满足<br>$$\partial_tP_t(x)=-m\partial_xP_t(x)+\frac{\sigma^2}{2}\partial_{xx}P_t(x).$$</p>
+<p>为了简化书写，我们定义$P_t(y,x)$为从$x$处开始的布朗运动在时间$t$时到达$y$的概率.同时定义对函数$f(x)$操作的运算符$L^*$：<br>$$L^*f(x)=-mf'(x)+\frac{\sigma^2}{2}f''(x)$$</p>
+<p>则上述等式可以写作<br>$$\partial_tP_t(x,y)=L^*_yP_t(x,y)$$</p>
+<p>$L^*$运算符里的负号可以通过如下方法消除：根据对称性，当漂移$m=0$时，$P_t(x,y)=P_t(y,x)$.当$m$为任意实数时，拥有漂移$m$的过程的逆转过程是拥有漂移$-m$的过程.故我们有$P_t(x,y)-m=P_t(y,x)$.</p>
+<p>现在定义运算符$L$：$Lf(x)=mf'(x)+\frac{\sigma^2}{2}f''(x)$<br>则<span style="color:blue">$$\partial_tP_t(x,y)=L_xP_t(x,y).$$</span></p>
+<p>$L$运算符比$L^*$常用许多.</p>
+<h2 id="6-期权支付的期望"><a title="6. 期权支付的期望" class="headerlink" href="#6-期权支付的期望"></a>6. 期权支付的期望</h2><p>现在讨论期权未来的期望.假设期权到期日（停时）为$T$，资产价格在$t$时刻（$t&lt;T$）为布朗运动$B_t$.<br>假设以上述资产为标的的期权的支付为$F(x)$.则未来支付的期望被定义为</p>
+<p>$$\phi(t,x)=E[F(B_t)\vert{B_0=x}]=\int_{-\infty}^{+\infty}F(y)P_t(x,y)dy$$</p>
+<p>对上式中时间$t$求偏导：<br>$$\partial_t\phi(t,x)=L_x\int_{-\infty}^{+\infty}F(y)P_t(x,y)dy=L_x\phi(t,x)$$</p>
+<p>所以，关于未来支付的期望，我们有：$\partial_t\phi(t,x)=L_x\phi(t,x)$，初值条件为$\phi(0,x)=F(x)$.</p>
+<h1 id="随即积分"><a title="随即积分" class="headerlink" href="#随即积分"></a>随即积分</h1><h2 id="1-定义-3"><a title="1. 定义" class="headerlink" href="#1-定义-3"></a>1. 定义</h2><p>一个随机过程，如布朗运动$X_t$，其微分形式，即过程的增量变化，可以写为<br>$$dX_t=m(t,X_t)dt+\sigma(t,X_t)dB_t$$</p>
+<p>这是随机微分方程（stochastic differential equation/SDE）的一个例子，我们称之为伊藤过程.在传统的黎曼积分中，我们只有$dt$项，但在加入随机项$dB_t$之后，SDE的复杂性随之而来.</p>
+<p>如果$X_t$满足以下表达式，我们认为$X_t$是上述SDE的解：<br>$$X_t=X_0+\int_0^t m(s,X_s)ds+\int_0^t \sigma(s,X_s)dB_s$$</p>
+<p>我们主要研究随机项带来的影响.更一般的，我们有<br>$$\int_0^t A_sdB_s$$</p>
+<p>我们也称上述关于布朗运动$B_t$的随机积分为伊藤积分（Itô integral）.</p>
+<h2 id="2-伊藤积分"><a title="2. 伊藤积分" class="headerlink" href="#2-伊藤积分"></a>2. 伊藤积分</h2><p>类比黎曼积分$\int_a^bf(x)dx=\sum_jf(x_{j-1})(x_j-x_{j-1})$，我们可以用类似的离散化过程定义随即积分.</p>
+<p>首先给出适应的定义.如果对于任意$t$，$A_t$是$\mathcal{F_t}$可测的，我们就认为过程$A_t$适应（adapted）于域流${\mathcal{F_t}}$.</p>
+<p>若$A_t$是一个连续且适应的过程，那么随即积分$Z_t=\int_0^tA_sdB_s$存在，并满足下面四条性质：</p>
+<ul>
+<li>Linearty：对于过程$A_t$和$C_t$，存在$\int_0^t(aA_s+bC_s)dB_s=a\int_0^tA_sdB_s+b\int_0^tC_sdB_s$</li>
+<li>Martingale：$Z_t$是关于${\mathcal{F}_t}$的鞅，且$Z_0=\mathbb{E}(Z_t)=0$</li>
+<li>Variance rule/Itô isometry（伊藤等距）：$\text{Var}(Z_t)=\mathbb{E}(Z_t^2)=\mathbb{E}\left[\left(\int_0^tA_sdB_s\right)^2\right]=\int_0^t\mathbb{E}(A_s^2)ds$</li>
+<li>Continuity：$Z_t$是关于$t$的连续函数</li>
+</ul>
+<p><code style="color:white; background-color: #800000">Example</code> 证明伊藤等距</p>
+<p>假设$A_t$在离散化后取值为$Y_t$，则我们有$Z_t=\sum_{i=0}^{j-1}Y_i[B_{t_{i+1}}-B_{t_i}]$.所以</p>
+<p>$$<br>\begin{aligned}<br>  \mathbb{E}[Z^2_t]&amp;=\mathbb{E}\left(\sum_{i=0}^{j-1}Y_i(B_{t_{i+1}}-B_{t_i})\right)^2\<br>  &amp;=\sum_{i=0}^{j-1}\mathbb{E}[Y_i^2(B_{t_{i+1}}-B_{t_i})^2]+\sum_{i\neq{k}}\mathbb{E}[Y_i(B_{t_{i+1}}-B_{t_i})Y_k(B_{t_{k+1}}-B_{t_k})]<br>\end{aligned}<br>$$<br>假设$i&lt;k$，我们有<br>$$<br>\begin{aligned}<br>  \mathbb{E}[Y_i(B_{t_{i+1}}-B_{t_i})Y_k(B_{t_{k+1}}-B_{t_k})]&amp;=\mathbb{E}[E(Y_i(B_{t_{i+1}}-B_{t_i})Y_k(B_{t_{k+1}}-B_{t_k})|\mathcal{F}<em>{t_k})]\<br>  &amp;=\mathbb{E}(Y_i(B</em>{t_{i+1}}-B_{t_i})Y_kE(B_{t_{k+1}}-B_{t_k}|\mathcal{F}<em>{t_k}))<br>\end{aligned}<br>$$<br>注意到$E(B</em>{t_{k+1}}-B_{t_k}|\mathcal{F}<em>{t_k})=0$，故上式为$0$.<br>因此，$\mathbb{E}(Z^2_t)=\sum</em>{i=0}^{j-1}\mathbb{E}[Y^2_i(B_{t_{t+1}}-B_{t_i})^2]$<br>其中</p>
+<p>$$<br>\begin{aligned}<br>  \mathbb{E}[Y^2_i(B_{t_{t+1}}-B_{t_i})^2]&amp;=\mathbb{E}[E[Y^2_i(B_{t_{i+1}}-B_{t_i})^2|\mathcal{F}<em>{t_i}]]\<br>  &amp;=\mathbb{E}[Y^2_iE[(B</em>{t_{i+1}}-B_{t_i})^2|\mathcal{F_{t_i}}]]<br>\end{aligned}<br>$$<br>注意到$E[(B_{t_{i+1}}-B_{t_i})^2|\mathcal{F_{t_i}}]=\text{Var}(B_{t_{i+1}}-B_{t_i})=t_{i+1}-t{i}$，</p>
+<p>故$\mathbb{E}(Z^2_t)=\sum_{i=0}^{j-1}\mathbb{E}(Y^2_i)[t_{i+1}-t{i}]=\int_0^{t}\mathbb{E}(A^2_s)ds.\quad\blacksquare$</p>
+<h2 id="3-伊藤定理"><a title="3. 伊藤定理" class="headerlink" href="#3-伊藤定理"></a>3. 伊藤定理</h2><p>对于正常的变量$s$，基本的微积分知识告诉我们$df(s)=f'(s)ds$.我们想知道对于一个随机变量$X$，上述表达式是否仍成立.</p>
+<p>考虑上述随机变量$x$为伊藤过程：$dX_t=\mu_tdt+\sigma_tdW_t$，我们想表达出$df(X_t)$或$df(X_t,t)$，伊藤定理可以帮助我们描述上面的关系.</p>
+<p>伊藤定理</p>
+
       
     </div>
 
@@ -413,15 +546,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>这篇博客汇总了一些笔者遇到的报错与解决办法。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/07/27/hexo-usage/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>这篇博客汇总了一些笔者遇到的报错与解决办法。</p>
+
+
+<h1 id="1-GitHub-deploy-error"><a title="1. GitHub deploy error" class="headerlink" href="#1-GitHub-deploy-error"></a>1. GitHub deploy error</h1><p>在hexo d部署之后产生：</p>
+
+<p>解决方法：GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国连接至香港可以解决。</p>
+
       
     </div>
 
@@ -478,15 +609,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件：
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/30/cloudinary-on-python/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>以Python为例，使用Cloudinary提供的免费CDN服务上传文件：</p>
+
+
+<h1 id="安装cloudinary"><a title="安装cloudinary" class="headerlink" href="#安装cloudinary"></a>安装cloudinary</h1>
+
+<h1 id="加载modules"><a title="加载modules" class="headerlink" href="#加载modules"></a>加载modules</h1>
+
+<h1 id="配置cloudinary"><a title="配置cloudinary" class="headerlink" href="#配置cloudinary"></a>配置cloudinary</h1>
+
+<h1 id="上传文件"><a title="上传文件" class="headerlink" href="#上传文件"></a>上传文件</h1>
+
       
     </div>
 
