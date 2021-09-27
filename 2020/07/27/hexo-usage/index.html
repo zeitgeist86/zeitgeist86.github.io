@@ -29,7 +29,7 @@
 <meta property="og:description" content="这篇博客汇总了一些笔者遇到的报错与解决办法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-26T16:46:14.000Z">
-<meta property="article:modified_time" content="2021-09-27T08:36:28.309Z">
+<meta property="article:modified_time" content="2021-09-27T08:38:15.257Z">
 <meta property="article:author" content="Yihong Liu">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -219,23 +219,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这篇博客汇总了一些笔者遇到的报错与解决办法。</p>
-<span id="more"></span>
-<h1>1. GitHub deploy error</h1>
-<p>在hexo d部署之后产生：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/zeitgeist86/zeitgeist86.github.io/&#x27;</span>: SSL: no alternative certificate subject name matches target host name <span class="string">&#x27;github</span></span><br><span class="line"><span class="string">.com&#x27;</span></span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (C:\Users\admin\hexoblog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (C:\Users\admin\hexoblog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure>
-<p>解决方法：</p>
+        <p>这篇博客汇总了一些笔者遇到的报错与解决办法。 <span id="more"></span></p>
+<h1 id="github-deploy-error">1. GitHub deploy error</h1>
+<p>在hexo d部署之后产生： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/zeitgeist86/zeitgeist86.github.io/&#x27;</span>: SSL: no alternative certificate subject name matches target host name <span class="string">&#x27;github</span></span><br><span class="line"><span class="string">.com&#x27;</span></span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (C:\Users\admin\hexoblog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (C:\Users\admin\hexoblog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure> 解决方法：</p>
 <ul>
-<li>
-<ol>
-<li>GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国切换至香港可以解决。</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>重启编辑器和Hexo</li>
-</ol>
-</li>
+<li>GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国切换至香港可以解决；</li>
+<li>重启编辑器和Hexo。</li>
 </ul>
 
     </div>
@@ -321,7 +310,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-text">1. GitHub deploy error</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#github-deploy-error"><span class="nav-text">1. GitHub deploy error</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
