@@ -347,7 +347,9 @@
       
           <h1 id="背景">1. 背景</h1>
 <p>在John Hull 1993版的金融衍生品一书中，Hull对蒙特卡洛法的美式期权定价有如下评论：</p>
+<blockquote>
 <p>"One limitation of the Monte Carlo simulation approach is that it can be used only for European-style derivative securities"</p>
+</blockquote>
 <p>在随后的版本中作者删除了这条陈述。不难理解Hull做出如上表述的理由：蒙特卡洛法本质上是一个<strong>forward algorithm</strong>（顺向算法），但美式期权由于需要比较行权的支付与不行权的支付期望，所以本质上通常是一个<strong>backward algorithm</strong>（逆向算法）。如果将通常的逆向算法应用于蒙特卡洛的单个模拟路径上，则得到未来价值来源于完美的事后预见，而非期望。Longstaff和Schwartz提出的模型有效解决了上述问题。</p>
           <!--noindex-->
             <div class="post-button">
