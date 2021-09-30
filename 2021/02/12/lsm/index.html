@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. 背景 在John Hull 1993版的金融衍生品一书中，Hull对蒙特卡洛法的美式期权定价有如下评论： &quot;One limitation of the Monte Carlo simulation approach is that it can be used only for European-style derivative securities&quot; 在随后的版本中作者删除了这条陈述">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Longstaff-Schwartz美式期权定价模型">
+<meta property="og:url" content="http://example.com/2021/02/12/lsm/index.html">
+<meta property="og:site_name" content="Yihong&#39;s Whiteboard">
+<meta property="og:description" content="1. 背景 在John Hull 1993版的金融衍生品一书中，Hull对蒙特卡洛法的美式期权定价有如下评论： &quot;One limitation of the Monte Carlo simulation approach is that it can be used only for European-style derivative securities&quot; 在随后的版本中作者删除了这条陈述">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632993952/lsm_01.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994084/lsm_02.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994375/lsm_03.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994686/lsm_04.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632995114/lsm_05.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996244/lsm_06.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996535/lsm_07.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996844/lsm_08.bmp">
+<meta property="og:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632997256/lsm_09.bmp">
+<meta property="article:published_time" content="2021-02-12T08:47:52.000Z">
+<meta property="article:modified_time" content="2021-09-30T10:26:37.866Z">
+<meta property="article:author" content="Yihong Liu">
+<meta property="article:tag" content="期权定价">
+<meta property="article:tag" content="数值方法">
+<meta property="article:tag" content="LSM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632993952/lsm_01.bmp">
+
+<link rel="canonical" href="http://example.com/2021/02/12/lsm/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Longstaff-Schwartz美式期权定价模型 | Yihong's Whiteboard</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Yihong's Whiteboard" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yihong's Whiteboard</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/12/lsm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yihong Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yihong's Whiteboard">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Longstaff-Schwartz美式期权定价模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-12 16:47:52" itemprop="dateCreated datePublished" datetime="2021-02-12T16:47:52+08:00">2021-02-12</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="背景">1. 背景</h1>
+<p>在John Hull 1993版的金融衍生品一书中，Hull对蒙特卡洛法的美式期权定价有如下评论：</p>
+<p>"One limitation of the Monte Carlo simulation approach is that it can be used only for European-style derivative securities"</p>
+<p>在随后的版本中作者删除了这条陈述。不难理解Hull做出如上表述的理由：蒙特卡洛法本质上是一个<strong>forward algorithm</strong>（顺向算法），但美式期权由于需要比较行权的支付与不行权的支付期望，所以本质上通常是一个<strong>backward algorithm</strong>（逆向算法）。如果将通常的逆向算法应用于蒙特卡洛的单个模拟路径上，则得到未来价值来源于完美的事后预见，而非期望。Longstaff和Schwartz提出的模型有效解决了上述问题。</p>
+<span id="more"></span>
+<h1 id="使用bermudan近似american带来的定价思想">2. 使用Bermudan近似American带来的定价思想</h1>
+<p>对于一个美式看跌期权，首先给出如下注释：</p>
+<ul>
+<li><span class="math inline">\([0,T]\)</span>：期限，同时定义行权时间<span class="math inline">\(t\in[0,T]\)</span></li>
+<li><span class="math inline">\(X_t\)</span>：马尔科夫状态变量，这里为标的资产价格</li>
+<li><span class="math inline">\(\left\{\mathcal{F}_t\right\}\)</span>：<span class="math inline">\(X_t\)</span>的域流<br></li>
+<li><span class="math inline">\(Y_t:=e^{-rT}(K-X_t)\)</span>：<span class="math inline">\(t\)</span>时刻支付的折现。注意支付不一定为最优<span class="math inline">\((K-X_t)^+\)</span>，但是一定存在<span class="math inline">\(Y_T:=e^{-rT}(K-X_t)^+\)</span><br></li>
+</ul>
+<p>相较于美式期权，Bermudan（百慕大式）期权只能在有限行权次数中行权，但随着“有限次数”不断趋于无穷，可以近似等价于美式期权。即<span class="math inline">\(N\)</span>个行权时间： <span class="math display">\[0=t_0&lt;{t_1}&lt;\ldots&lt;{t_N}=T\]</span> 如此，Bermudan在<span class="math inline">\(t_0\)</span>的价格为 <span class="math display">\[\max_{\tau}\mathbb{E}Y_{\tau}\]</span> 其中<span class="math inline">\(\tau\)</span>为取决于<span class="math inline">\(\left\{\mathcal{F}_t\right\}\)</span>的随机行权时间。这里也暗示了<span class="math inline">\(\tau\)</span>应从一种non-anticipating（非预测的）的方式选取——依据<strong>现阶段</strong>已经获得的所有信息做出的选取。最优行权时间只能回溯地获得。<br></p>
+<p>若在某可行行权时间<span class="math inline">\(t_n\)</span>之前都未行权，则存在<span class="math inline">\(\tau_n\in \{t_n,t_{n+1},\ldots,t_{N}\}\)</span>。我们可以给出严格的数学定义：<span class="math display">\[\tau_n:=t_n\mathbf{1}\left(Y_{t_n}\geq\mathbb{E}\left(Y_{\tau_{n+1}}\vert{X_{t_n}}\right)\right)+\tau_{n+1}\mathbf{1}\left(Y_{t_n}&lt;\mathbb{E}\left(Y_{\tau_{n+1}}\vert X_{t_n}\right)\right)\]</span> 换言之，我们需做出如下决策：给定现在的标的资产价格时，若<span class="math inline">\(t_n\)</span>时刻行权的折现支付大于等于在未来某时刻行权折现支付的条件期望，则我们在<span class="math inline">\(t_n\)</span>时刻行权。即 <span class="math display">\[
+\tau_n=\left\{
+\begin{array}{c}
+ t_n,&amp; \text{if } Y_{t_n}\geq \mathbb{E}\left(Y_{\tau_{n+1}}\vert X_{t_n}\right)\\
+    \tau_{n+1},              &amp; \text{if } Y_{t_n}&lt; \mathbb{E}\left(Y_{\tau_{n+1}}\vert X_{t_n}\right)
+\end{array}
+\right.
+\]</span> 以上的关于<span class="math inline">\(\tau_n\)</span>的递归定义符合之前所述的逆向算法。同时，如何估计<span class="math inline">\(\mathbb{E}\left(Y_{\tau_{n+1}}\vert X_{t_n}\right)\)</span>十分关键。我们将该条件期望写作函数： <span class="math display">\[f_n(x):=\mathbb{E}\left(Y_{\tau_{n+1}}\vert X_{t_n}=x\right)\]</span></p>
+<h1 id="longstaff-schwartz最小二乘的蒙特卡洛模拟">3. Longstaff-Schwartz：最小二乘的蒙特卡洛模拟</h1>
+<p>Longstaff和Schwartz使用最小二乘法的思想给出了<span class="math inline">\(f_n(x)\)</span>的计算方法。首先模拟关于<span class="math inline">\(X\)</span>的<span class="math inline">\(M\)</span>条路径，每条路径应包括<span class="math inline">\(N\)</span>个节点以反应<span class="math inline">\(N\)</span>个可行权时间。</p>
+<p>参照上文，定义<span class="math inline">\({\hat\tau}_N:=T\)</span>。在每一条路径<span class="math inline">\(m=1,\ldots,M\)</span>上，当给定 <span class="math inline">\({\hat\tau}_{n+1}^m\)</span>时，我们定义 <span class="math display">\[{\hat\tau}_{n}^m:=t_n\mathbf{1}\left(Y_{t_n}^m\geq\hat{f}_n(X^m_{t_n})\right)+\tau_{n+1}\mathbf{1}\left(Y_{t_n}^m&lt;\hat{f}_n(X^m_{t_n})\right)\]</span> 其中<span class="math inline">\(\hat{f}_n\)</span>是对连续值的最小二乘估计。特别的，如果已知<span class="math inline">\(f_n\)</span>恒非负，可以使用<span class="math inline">\(\hat{f}_n(X^m_{t_n})^+\)</span>替代<span class="math inline">\(\hat{f}_n(X^m_{t_n})\)</span>。</p>
+<p>如此，我们得到0时刻的期权价格： <span class="math display">\[\hat{C}^{\text{LS}}_M:=\frac{1}{M}\sum_{m}Y^m_{\hat{\tau}_0^m}\]</span></p>
+<h1 id="实例美式看跌期权的lsm定价">4. 实例：美式看跌期权的LSM定价</h1>
+<p>下面，我们只需要估计<span class="math inline">\(\hat{f}_n\)</span>。</p>
+<p>假设初始标的价格<span class="math inline">\(X_0=1\)</span>，行权价<span class="math inline">\(K=1.1\)</span>，无风险利率<span class="math inline">\(r_f=0.03\)</span>，标的波动率<span class="math inline">\(\sigma=0.20\)</span>，票期<span class="math inline">\(T=4\)</span>，路径模拟时间间隔<span class="math inline">\(dt=1\)</span>。假设标的服从几何布朗运动，我们首先模拟10条标的价格的路径：</p>
+<p><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632993952/lsm_01.bmp" /></p>
+<p>之后，我们使用逆向算法的思维开始定价。首先从最后一个时间点<span class="math inline">\(t_4\)</span>开始，计算支付在<span class="math inline">\(t_4\)</span>的现值：<span class="math display">\[Y_4=(K-X_4)^+\]</span></p>
+<p><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994084/lsm_02.bmp" /></p>
+<p>例如，路径1在<span class="math inline">\(t_4\)</span>的支付为<span class="math inline">\((1.1-0.9757,0)^+=0.1243\)</span>。 回溯至<span class="math inline">\(t_3\)</span>，将上述支付折现获得<span class="math inline">\(Y_3\)</span>，如<span class="math inline">\(0.1206=0.1243\exp\{-1*0.03\}\)</span>： <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994375/lsm_03.bmp" /></p>
+<p>进行最小二乘估计，我们假设<span class="math inline">\(\hat{f}(X_3)=a_3(X_3)^2+b_3X_3+C_3\)</span>，即，当期支付关于模拟股价的二次回归： <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632994686/lsm_04.bmp" /> <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632995114/lsm_05.bmp" /> 我们得到<span class="math inline">\(\hat{f}(X_3)=0.7825(X_3)^2-1.9349X_3+1.1781\)</span>，这代表已知<span class="math inline">\(t_3\)</span>的标的价格时，我们可以通过这个回归方程获得持有至<span class="math inline">\(t_4\)</span>时支付的期望。</p>
+<p>将10条路径的<span class="math inline">\(X_3\)</span>带入回归方程，我们得到继续持有的支付期望，即estimated continuation value： <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996244/lsm_06.bmp" /> 例如<span class="math inline">\(0.0817=0.7825*0.8795^2-1.9349*0.8795+1.1781\)</span>。</p>
+<p>现在我们可以比较立刻行权的支付<span class="math inline">\(Y_3\)</span>和通过最小二乘估计的继续持有支付期望<span class="math inline">\(\hat{f}(X_3)\)</span>来确定是否应该行权，如果继续持有的支付期望小于立刻行权的支付，那么我们立刻行权： <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996535/lsm_07.bmp" /></p>
+<p>通过行权与否，写出<span class="math inline">\(t_3\)</span>获得的现金流：</p>
+<p><img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632996844/lsm_08.bmp" /></p>
+<p>现在，我们可以通过<span class="math inline">\(t_3\)</span>获得的现金流通过相同的办法遍历<span class="math inline">\(t_2\)</span>，同理通过<span class="math inline">\(t_1\)</span>获得的现金流遍历<span class="math inline">\(t_0\)</span>。我们将获得 <img src="https://res.cloudinary.com/ddiv6l5im/image/upload/v1632997256/lsm_09.bmp" /></p>
+<p>这里只需平均<span class="math inline">\(t_0\)</span>时刻的现金流并与行权支付<span class="math inline">\(1.1-1.0=0.1\)</span>相比较，就能获得<span class="math inline">\(t_0\)</span>时刻期权价格的期望，<span class="math inline">\(0.19\)</span>。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%9F%E6%9D%83%E5%AE%9A%E4%BB%B7/" rel="tag"><i class="fa fa-tag"></i> 期权定价</a>
+              <a href="/tags/%E6%95%B0%E5%80%BC%E6%96%B9%E6%B3%95/" rel="tag"><i class="fa fa-tag"></i> 数值方法</a>
+              <a href="/tags/LSM/" rel="tag"><i class="fa fa-tag"></i> LSM</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/30/excel-python-screenshot/" rel="prev" title="使用Python对Excel单元格截图">
+      <i class="fa fa-chevron-left"></i> 使用Python对Excel单元格截图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/02/wechatbot/" rel="next" title="基于最新web协议的wechaty高并发机器人的环境配置与实现">
+      基于最新web协议的wechaty高并发机器人的环境配置与实现 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8bermudan%E8%BF%91%E4%BC%BCamerican%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%AE%9A%E4%BB%B7%E6%80%9D%E6%83%B3"><span class="nav-text">2. 使用Bermudan近似American带来的定价思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#longstaff-schwartz%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E7%9A%84%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%A8%A1%E6%8B%9F"><span class="nav-text">3. Longstaff-Schwartz：最小二乘的蒙特卡洛模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E7%BE%8E%E5%BC%8F%E7%9C%8B%E8%B7%8C%E6%9C%9F%E6%9D%83%E7%9A%84lsm%E5%AE%9A%E4%BB%B7"><span class="nav-text">4. 实例：美式看跌期权的LSM定价</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Yihong Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:liu.yi.hong@outlook.com" title="E-Mail → mailto:liu.yi.hong@outlook.com" rel="noopener" target="_blank">E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/liuyihong86" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;liuyihong86" rel="noopener" target="_blank">Linkedin</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2020 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yihong Liu</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+    </div>
+</body>
+</html>
