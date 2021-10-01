@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="这篇博客汇总了一些笔者遇到的报错与解决办法。">
+  <meta name="description" content="这篇博客汇总了一些笔者遇到的Hexo使用方法、报错及解决方法。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo报错与解决办法">
+<meta property="og:title" content="Hexo使用、报错、解决办法">
 <meta property="og:url" content="http://example.com/2020/07/27/hexo-usage/index.html">
 <meta property="og:site_name" content="Yihong&#39;s Whiteboard">
-<meta property="og:description" content="这篇博客汇总了一些笔者遇到的报错与解决办法。">
+<meta property="og:description" content="这篇博客汇总了一些笔者遇到的Hexo使用方法、报错及解决方法。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-26T16:46:14.000Z">
-<meta property="article:modified_time" content="2021-09-30T09:24:45.322Z">
+<meta property="article:modified_time" content="2021-10-01T12:16:19.968Z">
 <meta property="article:author" content="Yihong Liu">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>Hexo报错与解决办法 | Yihong's Whiteboard</title>
+  <title>Hexo使用、报错、解决办法 | Yihong's Whiteboard</title>
   
 
 
@@ -195,7 +195,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hexo报错与解决办法
+          Hexo使用、报错、解决办法
         </h1>
 
         <div class="post-meta">
@@ -219,9 +219,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这篇博客汇总了一些笔者遇到的报错与解决办法。</p>
+        <p>这篇博客汇总了一些笔者遇到的Hexo使用方法、报错及解决方法。</p>
 <span id="more"></span>
-<h1 id="github-deploy-error">1. GitHub deploy error</h1>
+<h1 id="使用">1. 使用</h1>
+<h2 id="next主题下使用mathjax">1.1 NexT主题下使用MathJax</h2>
+<h3 id="使用宏">1.1.1 使用宏</h3>
+<p>比如，我们不想总是输入<code>\mathbf&#123;&#125;</code>来表示粗体，我们可以在LaTex中定义宏<code>\b</code>来减少代码量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\def\b#1&#123;&#123;\mathbf #1&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>在Hexo中，我们可以在<code>themes/next/layout/_third-party/math/mathjax.swig</code>中增添这个宏： <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.MathJax = &#123;</span><br><span class="line">  <span class="attr">tex</span>: &#123;</span><br><span class="line">    <span class="attr">macros</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;b&#x27;</span>: [<span class="string">&quot;&#123;\\mathbf #1&#125;&quot;</span>, <span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 在修改完之后需重启Hexo。</p>
+<h2 id="部署到github上">1.2 部署到GitHub上</h2>
+<p>需严格分为<code>hexo clean</code>hexo g</code><code>hexo d</code>三步，不要合并步骤，原因不明。</p>
+<h1 id="报错与解决方法">2. 报错与解决方法</h1>
+<h2 id="github-deploy-error">2.1 GitHub deploy error</h2>
 <p>在hexo d部署之后产生： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/zeitgeist86/zeitgeist86.github.io/&#x27;</span>: SSL: no alternative certificate subject name matches target host name <span class="string">&#x27;github</span></span><br><span class="line"><span class="string">.com&#x27;</span></span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (C:\Users\admin\hexoblog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (C:\Users\admin\hexoblog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure> 解决方法：</p>
 <ul>
 <li>GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国切换至香港可以解决；</li>
@@ -311,7 +320,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#github-deploy-error"><span class="nav-text">1. GitHub deploy error</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-text">1. 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next%E4%B8%BB%E9%A2%98%E4%B8%8B%E4%BD%BF%E7%94%A8mathjax"><span class="nav-text">1.1 NexT主题下使用MathJax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%AE%8F"><span class="nav-text">1.1.1 使用宏</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0github%E4%B8%8A"><span class="nav-text">1.2 部署到GitHub上</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%A5%E9%94%99%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="nav-text">2. 报错与解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-deploy-error"><span class="nav-text">2.1 GitHub deploy error</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -325,12 +334,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -501,6 +510,9 @@ window.addEventListener('pjax:success', () => {
         }
       },
       tex: {
+        macros: {
+          'b': ['{\\mathbf #1}', 1]
+        },
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'
       },

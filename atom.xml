@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-09-27T08:14:38.805Z</updated>
+  <updated>2021-10-01T09:40:41.730Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Notes on Multivariate Data Analysis via Matrix Decompositions</title>
+    <link href="http://example.com/2021/09/30/multivar-data-note/"/>
+    <id>http://example.com/2021/09/30/multivar-data-note/</id>
+    <published>2021-09-30T12:30:07.000Z</published>
+    <updated>2021-10-01T09:40:41.730Z</updated>
+    
+    <content type="html"><![CDATA[<p>This post is my notes on Multivariate Data Analysis via Matrix Decompositions, UChicago. The course is also known as <em>Unsupervised Learning</em> in machine learning.</p><span id="more"></span><h1 id="review-on-linear-algebra">1. Review on Linear Algebra</h1><h2 id="matrix-multiplication">1.1 Matrix Multiplication</h2><p>We denote matrix <span class="math inline">\(\b{A}=[a_{ij}]_{i,j=1}^{m,n}\in\mathbb{R}^{m\times{n}}\)</span>, where <span class="math display">\[\b{A}=            \begin{pmatrix}            a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\            a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\            \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\            a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\            \end{pmatrix}.\]</span></p><p>We denote column vector <span class="math inline">\(\b{X}\in\mathbb{R}^n\)</span>, where <span class="math display">\[\b{X}=  \begin{pmatrix}  x_1\\  x_2\\  \vdots\\  x_n\\  \end{pmatrix}.\]</span></p><p>We always write a row vector as the transpose of a column vector, <span class="math inline">\(\b{X}&#39;=[x_1,x_2,\ldots,x_n]\)</span></p><p><span class="math display">\[\b{3}\]</span></p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;This post is my notes on Multivariate Data Analysis via Matrix Decompositions, UChicago. The course is also known as &lt;em&gt;Unsupervised Learning&lt;/em&gt; in machine learning.&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="多元数据分析" scheme="http://example.com/tags/%E5%A4%9A%E5%85%83%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+    <category term="无监督学习" scheme="http://example.com/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>如何使用Intel® oneAPI toolkit加速Visual Studio中的C++</title>
@@ -137,16 +160,16 @@
   </entry>
   
   <entry>
-    <title>Hexo报错与解决办法</title>
+    <title>Hexo使用、报错、解决办法</title>
     <link href="http://example.com/2020/07/27/hexo-usage/"/>
     <id>http://example.com/2020/07/27/hexo-usage/</id>
     <published>2020-07-26T16:46:14.000Z</published>
-    <updated>2021-09-30T09:24:45.322Z</updated>
+    <updated>2021-10-01T12:16:19.968Z</updated>
     
-    <content type="html"><![CDATA[<p>这篇博客汇总了一些笔者遇到的报错与解决办法。</p><span id="more"></span><h1 id="github-deploy-error">1. GitHub deploy error</h1><p>在hexo d部署之后产生： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/zeitgeist86/zeitgeist86.github.io/&#x27;</span>: SSL: no alternative certificate subject name matches target host name <span class="string">&#x27;github</span></span><br><span class="line"><span class="string">.com&#x27;</span></span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (C:\Users\admin\hexoblog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (C:\Users\admin\hexoblog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure> 解决方法：</p><ul><li>GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国切换至香港可以解决；</li><li>重启编辑器和Hexo。</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>这篇博客汇总了一些笔者遇到的Hexo使用方法、报错及解决方法。</p><span id="more"></span><h1 id="使用">1. 使用</h1><h2 id="next主题下使用mathjax">1.1 NexT主题下使用MathJax</h2><h3 id="使用宏">1.1.1 使用宏</h3><p>比如，我们不想总是输入<code>\mathbf&#123;&#125;</code>来表示粗体，我们可以在LaTex中定义宏<code>\b</code>来减少代码量：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\def\b#1&#123;&#123;\mathbf #1&#125;&#125;</span><br></pre></td></tr></table></figure><p>在Hexo中，我们可以在<code>themes/next/layout/_third-party/math/mathjax.swig</code>中增添这个宏： <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.MathJax = &#123;</span><br><span class="line">  <span class="attr">tex</span>: &#123;</span><br><span class="line">    <span class="attr">macros</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;b&#x27;</span>: [<span class="string">&quot;&#123;\\mathbf #1&#125;&quot;</span>, <span class="number">1</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 在修改完之后需重启Hexo。</p><h2 id="部署到github上">1.2 部署到GitHub上</h2><p>需严格分为<code>hexo clean</code>hexo g</code><code>hexo d</code>三步，不要合并步骤，原因不明。</p><h1 id="报错与解决方法">2. 报错与解决方法</h1><h2 id="github-deploy-error">2.1 GitHub deploy error</h2><p>在hexo d部署之后产生： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access <span class="string">&#x27;https://github.com/zeitgeist86/zeitgeist86.github.io/&#x27;</span>: SSL: no alternative certificate subject name matches target host name <span class="string">&#x27;github</span></span><br><span class="line"><span class="string">.com&#x27;</span></span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">      at ChildProcess.&lt;anonymous&gt; (C:\Users\admin\hexoblog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (events.js:315:20)</span><br><span class="line">      at ChildProcess.cp.emit (C:\Users\admin\hexoblog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something<span class="string">&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span></span><br></pre></td></tr></table></figure> 解决方法：</p><ul><li>GitHub在IP地址与系统时间不符时会启动网络安全报错，将VPN连接路线从美国切换至香港可以解决；</li><li>重启编辑器和Hexo。</li></ul>]]></content>
     
     
-    <summary type="html">&lt;p&gt;这篇博客汇总了一些笔者遇到的报错与解决办法。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;这篇博客汇总了一些笔者遇到的Hexo使用方法、报错及解决方法。&lt;/p&gt;</summary>
     
     
     
