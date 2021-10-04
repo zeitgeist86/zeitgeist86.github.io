@@ -474,7 +474,9 @@ window.addEventListener('pjax:success', () => {
       },
       tex: {
         macros: {
-          'b': ['{\\mathbf #1}', 1]
+          'b': ['{\\mathbf #1}', 1],
+          'bb': ['{\\boldsymbol #1}', 1],
+          'norm': ['{\\Vert #1 \\Vert}', 1]
         },
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'
