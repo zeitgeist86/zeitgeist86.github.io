@@ -190,6 +190,46 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2021-10-09T23:14:06+08:00"
+              content="2021-10-09">
+          10-09
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/09/economics/" itemprop="url">
+            <span itemprop="name">Notes on Topics of Economics</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-08T19:28:43+08:00"
+              content="2021-10-08">
+          10-08
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2021/10/08/deep-learning-notes/" itemprop="url">
+            <span itemprop="name">Notes on Probabilistic Programming and Deeping Learning</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2021-09-30T20:30:07+08:00"
               content="2021-09-30">
           09-30
@@ -420,12 +460,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -599,7 +639,9 @@ window.addEventListener('pjax:success', () => {
         macros: {
           'b': ['{\\mathbf #1}', 1],
           'bb': ['{\\boldsymbol #1}', 1],
-          'norm': ['{\\Vert #1 \\Vert}', 1]
+          'norm': ['{\\Vert #1 \\Vert}', 1],
+          'argmax': ['{\\underset #1{\\arg\\max}}\\,', 1],
+          'argmin': ['{\\underset #1{\\arg\\min}}\\,', 1]
         },
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'

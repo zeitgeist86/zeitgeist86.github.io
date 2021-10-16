@@ -21,15 +21,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yihong&#39;s Whiteboard">
-<meta property="og:url" content="http://example.com/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/index.html">
+  <meta name="description" content="This is the notes on my graduate course Topics of Economics, which basicallly covers asset pricing (from a financial ecomonics point of view) and macroeconomics analysis.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Topics of Economics">
+<meta property="og:url" content="http://example.com/2021/10/09/economics/index.html">
 <meta property="og:site_name" content="Yihong&#39;s Whiteboard">
+<meta property="og:description" content="This is the notes on my graduate course Topics of Economics, which basicallly covers asset pricing (from a financial ecomonics point of view) and macroeconomics analysis.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-09T15:14:06.000Z">
+<meta property="article:modified_time" content="2021-10-16T16:26:01.098Z">
 <meta property="article:author" content="Yihong Liu">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Economics">
+<meta property="article:tag" content="Asset Pricing">
+<meta property="article:tag" content="Macroeconomics">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="http://example.com/2021/10/09/economics/">
 
 
 <script id="page-configurations">
@@ -37,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>标签: 无监督学习 | Yihong's Whiteboard</title>
+  <title>Notes on Topics of Economics | Yihong's Whiteboard</title>
   
 
 
@@ -170,51 +178,128 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">无监督学习
-          <small>标签</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/09/economics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yihong Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yihong's Whiteboard">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on Topics of Economics
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-09 23:14:06" itemprop="dateCreated datePublished" datetime="2021-10-09T23:14:06+08:00">2021-10-09</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <p>This is the notes on my graduate course <em>Topics of Economics</em>, which basicallly covers asset pricing (from a financial ecomonics point of view) and macroeconomics analysis.</p>
+<span id="more"></span>
+<h1 id="risk-premium-puzzle">1. Risk Premium Puzzle</h1>
+<blockquote>
+<p>The <em>equity risk premium puzzle</em> states that, equity are "overvalued" with respect to bonds</p>
+</blockquote>
+<h2 id="stochastic-discount-factor">1.1 Stochastic Discount Factor</h2>
+<ul>
+<li><strong><span style="color:blue">Stochastic discount factor (SDF)</span></strong> : Consider a market with money market account <span class="math inline">\(R_t\)</span> and <span class="math inline">\(i\)</span> divident-paying assets <span class="math inline">\(S_{i,t}\)</span>, then the random variable <span class="math inline">\(\Lambda\)</span> is a SDF if
+<ul>
+<li><span class="math inline">\(\Lambda_0=1\)</span></li>
+<li><span class="math inline">\(\forall t, Pr(\Lambda_t&gt;0)=1\)</span></li>
+<li><span class="math inline">\(\Lambda_t\times S_t\)</span> and <span class="math inline">\(\Lambda_t\times R_t\)</span> are martingales</li>
+</ul></li>
+<li>For the last property, <span class="math inline">\(\forall T&gt;t\)</span>, we have: <span class="math inline">\(\Lambda_t\times S_{i,t}=E(\Lambda_T\times S_{i,T}|\mathcal{F}_t)=E_t(\Lambda_T\times S_{i,T})\)</span>, so <span class="math inline">\(E_t[\Lambda_T/\Lambda_t S_{i,t}]=S_{i,t}\)</span></li>
+<li>More generally, we have <span style="color:red"> <span class="math display">\[P_t=E_t\left[\int_{s=0}^{\infty} \frac{\Lambda_{t+s}}{\Lambda_t}D_{t+s}ds\right]\]</span> </span> where
+<ul>
+<li><span class="math inline">\(D_t\)</span>: the dividend yielded by the asset</li>
+<li><span class="math inline">\(P_t\)</span>: price of the asset</li>
+</ul></li>
+</ul>
+<h2 id="processes">1.2 Processes</h2>
+<ul>
+<li><span class="math inline">\(\Lambda_t\)</span> is a decreasing function of <span class="math inline">\(t\)</span> but is always positive, so we can write its process as: <span style="color:red"> <span class="math display">\[\frac{d\Lambda_t}{\Lambda_t}=-r_t^fdt-\sigma_t^\Lambda dZ_t\]</span> </span> where
+<ul>
+<li><span class="math inline">\(r_t^f\)</span>: risk-free rate</li>
+<li><span class="math inline">\(\sigma_t^\Lambda\)</span>: market price of risk</li>
+</ul></li>
+<li>For ex-divident price of an asset <span class="math inline">\(P_t\)</span>, we have <span style="color:red"> <span class="math display">\[\frac{dP_t}{P_t}=\mu_t^Pdt+\sigma_t^PdZ_t\]</span> </span> where
+<ul>
+<li><span class="math inline">\(\mu_t^PP_t\)</span>: instantaneous expected capital gain</li>
+<li><span class="math inline">\(\sigma_t^PP_t\)</span>: exposure of the asset to the shock <span class="math inline">\(Z_t\)</span></li>
+</ul></li>
+<li>The instantaneous return <span class="math inline">\(R_t\)</span> is the sum of the return of the capital gains and the return of dividents, so <span class="math display">\[dR_t=\frac{dP_t+D_tdt}{P_t}\]</span></li>
+</ul>
+<h2 id="basic-asset-pricing-models">1.3 Basic Asset Pricing models</h2>
+<ul>
+<li><p>By no arbitrage condition, the <strong><span style="color:blue">one-period pricing equation</span></strong> is <span style="color:red"> <span class="math display">\[-\Lambda_tD_tdt=E_t[d(\Lambda_tP_t)]\]</span> </span></p></li>
+<li><p>Using Itô's lemma, we have <span class="math inline">\(d(\Lambda_tP_t)=P_td\Lambda_t+\Lambda_tdP_t+dP_td\Lambda_t\)</span>. Rewrite the one-period pricing euqation, we get <span style="color:red"> <span class="math display">\[\frac{D_t}{P_t}+\mu_t^P-r^f_t=\sigma_t^P\sigma_t^\Lambda\]</span> </span> where left hand side is the excess return, and the right hand side is the covariance between returns and (minus) change in subjective valuation.</p></li>
+</ul>
+<h2 id="usage">1.4 Usage</h2>
+<ul>
+<li>Use price <span class="math inline">\(P_t\)</span> data to estimate SDF <span class="math inline">\(\Lambda_t\)</span></li>
+<li>Model a SDF <span class="math inline">\(\Lambda_t\)</span> to compute the correspoding price <span class="math inline">\(P_t\)</span></li>
+<li>We will focus on the second approach</li>
+</ul>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-09-30T20:30:07+08:00"
-              content="2021-09-30">
-          09-30
-        </time>
-      </div>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Notes/" rel="tag"><i class="fa fa-tag"></i> Notes</a>
+              <a href="/tags/Economics/" rel="tag"><i class="fa fa-tag"></i> Economics</a>
+              <a href="/tags/Asset-Pricing/" rel="tag"><i class="fa fa-tag"></i> Asset Pricing</a>
+              <a href="/tags/Macroeconomics/" rel="tag"><i class="fa fa-tag"></i> Macroeconomics</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/09/30/multivar-data-note/" itemprop="url">
-            <span itemprop="name">Notes on Multivariate Data Analysis via Matrix Decompositions</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/08/deep-learning-notes/" rel="prev" title="Notes on Probabilistic Programming and Deeping Learning">
+      <i class="fa fa-chevron-left"></i> Notes on Probabilistic Programming and Deeping Learning
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -267,6 +352,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#risk-premium-puzzle"><span class="nav-text">1. Risk Premium Puzzle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stochastic-discount-factor"><span class="nav-text">1.1 Stochastic Discount Factor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#processes"><span class="nav-text">1.2 Processes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-asset-pricing-models"><span class="nav-text">1.3 Basic Asset Pricing models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usage"><span class="nav-text">1.4 Usage</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -280,12 +366,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -459,7 +545,9 @@ window.addEventListener('pjax:success', () => {
         macros: {
           'b': ['{\\mathbf #1}', 1],
           'bb': ['{\\boldsymbol #1}', 1],
-          'norm': ['{\\Vert #1 \\Vert}', 1]
+          'norm': ['{\\Vert #1 \\Vert}', 1],
+          'argmax': ['{\\underset #1{\\arg\\max}}\\,', 1],
+          'argmin': ['{\\underset #1{\\arg\\min}}\\,', 1]
         },
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'

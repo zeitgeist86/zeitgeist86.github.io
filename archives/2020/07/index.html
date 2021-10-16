@@ -277,12 +277,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -456,7 +456,9 @@ window.addEventListener('pjax:success', () => {
         macros: {
           'b': ['{\\mathbf #1}', 1],
           'bb': ['{\\boldsymbol #1}', 1],
-          'norm': ['{\\Vert #1 \\Vert}', 1]
+          'norm': ['{\\Vert #1 \\Vert}', 1],
+          'argmax': ['{\\underset #1{\\arg\\max}}\\,', 1],
+          'argmin': ['{\\underset #1{\\arg\\min}}\\,', 1]
         },
         inlineMath: {'[+]': [['$', '$']]},
         tags: 'ams'

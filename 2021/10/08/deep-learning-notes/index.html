@@ -21,15 +21,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yihong&#39;s Whiteboard">
-<meta property="og:url" content="http://example.com/archives/2020/09/index.html">
+  <meta name="description" content="This is the notes on my graduate course Probabilistic Programming and Deeping Learning. I&#39;ll try to use a mininal math to illustrate the rationale behind the models.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notes on Probabilistic Programming and Deeping Learning">
+<meta property="og:url" content="http://example.com/2021/10/08/deep-learning-notes/index.html">
 <meta property="og:site_name" content="Yihong&#39;s Whiteboard">
+<meta property="og:description" content="This is the notes on my graduate course Probabilistic Programming and Deeping Learning. I&#39;ll try to use a mininal math to illustrate the rationale behind the models.">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-08T11:28:43.000Z">
+<meta property="article:modified_time" content="2021-10-16T15:14:29.178Z">
 <meta property="article:author" content="Yihong Liu">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="概率编程">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2020/09/">
+<link rel="canonical" href="http://example.com/2021/10/08/deep-learning-notes/">
 
 
 <script id="page-configurations">
@@ -37,12 +44,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Yihong's Whiteboard</title>
+  <title>Notes on Probabilistic Programming and Deeping Learning | Yihong's Whiteboard</title>
   
 
 
@@ -170,48 +177,115 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/10/08/deep-learning-notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Yihong Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yihong's Whiteboard">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Notes on Probabilistic Programming and Deeping Learning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-10-08 19:28:43" itemprop="dateCreated datePublished" datetime="2021-10-08T19:28:43+08:00">2021-10-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
+        <p>This is the notes on my graduate course <em>Probabilistic Programming and Deeping Learning</em>. I'll try to use a mininal math to illustrate the rationale behind the models.</p>
+<span id="more"></span>
+<h1 id="markov-decision-process">1. Markov Decision Process</h1>
+<h2 id="elements">1.1 Elements</h2>
+<p>A (finite) <strong><span style="color:blue">Markov Decision Process (MDP)</span></strong> consists of</p>
+<ul>
+<li>A finite <strong><span style="color:blue">state</span></strong> space <span class="math inline">\(\mathcal{S}\)</span></li>
+<li>A finite <strong><span style="color:blue">action</span></strong> space <span class="math inline">\(\mathcal{A}\)</span></li>
+<li>A finte <strong><span style="color:blue">reward</span></strong> space <span class="math inline">\(\mathcal{R}\subset\mathbb{R}\)</span></li>
+<li>A subset <span class="math inline">\(\mathcal{A}\subset\mathcal{A}\)</span> of <strong><span style="color:blue">admissible actions</span></strong> in state <span class="math inline">\(s\in\mathcal{S}\)</span></li>
+<li>A random variable <span class="math inline">\(S_{s,a}\)</span> represents a <strong><span style="color:blue">state-action pair</span></strong> with values in <span class="math inline">\(\mathcal{S}\times\mathcal{R}\)</span></li>
+<li><strong><span style="color:blue">Transition probability</span></strong>: <span class="math inline">\(Pr(S_{s,a}=(s&#39;,r))=p(s&#39;,r\vert s,a)\)</span> is the probability we move from state <span class="math inline">\(s\)</span> with action <span class="math inline">\(a\)</span> and reach a new state <span class="math inline">\(s&#39;\)</span> at reward <span class="math inline">\(r\)</span></li>
+<li><strong><span style="color:blue">Policy</span></strong> defines the way we select an action <span class="math inline">\(s\)</span> from <span class="math inline">\(\mathcal{F}\)</span>. Let <span class="math inline">\(\pi(a\vert{s})\)</span> to be the probability of choosing action a in state s, so <span class="math inline">\(\pi(a\vert{s})=Pr(A_s=a)\)</span></li>
+<li><strong><span style="color:blue">Discount factor</span></strong> <span class="math inline">\(\gamma\)</span> penalizes the number of steps, so we can reach a optimal "route" in the Markov chain</li>
+</ul>
+<h2 id="value-functions-from-bellman-equation">1.2 Value Functions from Bellman Equation</h2>
+<p>Now that we have defined the above elements, we can then define our target function, the <strong><span style="color:blue">value function</span></strong>: <span class="math display">\[v_\pi(s)=\mathbb{E}_\pi\left(\sum_{k=0}\gamma^kR_{t+k+1}|S_t=s\right)\]</span></p>
+<p>This is the expectation of the sum of all future discounted rewards conditional on the current state <span class="math inline">\(s\)</span> when follow policy <span class="math inline">\(\pi\)</span>.</p>
+<p>Value function can be solved by using the <strong><span style="color:blue">Bellman equation</span></strong>, which is given by <span class="math display">\[v_{\pi}(s)=\sum_{a\in\mathcal{A}}\pi(a\vert{s})\sum_{s&#39;\in\mathcal{S}}\sum_{r\in\mathcal{R}}p(s&#39;,r|s,a)(r+\gamma{v}_\pi(s&#39;))\]</span></p>
+<p>When further conditioned on the action <span class="math inline">\(a\)</span>, we have <strong><span style="color:blue">state-action function</span></strong>, a quasi-value function: <span class="math display">\[q_\pi(s,a)=\mathbb{E}_\pi\left(\sum_{k=0}\gamma^kR_{t+k+1}|S_t=s,A_t=a\right)\]</span></p>
+<p>By definition, obviously, we have <span class="math inline">\(v_\pi(s)=\sum_a\pi(a|s)q_\pi(s,a)\)</span>.</p>
+<p>The calculation is given by the Bellman equation for the state-action, in which the second equality explains the intuition that the action-value is the expectation of the discounted sum of rewards by taking action <span class="math inline">\(a\)</span> in state <span class="math inline">\(s\)</span> at time <span class="math inline">\(t\)</span> and for the rest of the time follow policy <span class="math inline">\(\pi\)</span>: <span class="math display">\[
+\begin{aligned}
+q_\pi(s,a)&amp;=\sum_{s&#39;,a&#39;}\sum_rp(s&#39;,r|s,a)(r+\gamma{q}_{\pi}(s&#39;,a&#39;)\pi(a&#39;|s&#39;))\\
+&amp;=\mathbb{E}(R_{t+1}+\gamma{v}_\pi(S_{t+1})|S_t=s,A_t=a)
+\end{aligned}
+\]</span></p>
+<h2 id="policy-improvement">1.3 Policy Improvement</h2>
+<p>By sequentially finding better and better policies, we can optimize our value function.</p>
+<p>A policy is said to be optimal if for <span class="math inline">\(q(s,a)\)</span> and <span class="math inline">\(v(s)=\max_aq(s,a)\)</span>, and the new optimal policy <span class="math display">\[\pi&#39;(a|s)=\argmax{a}q(s|a)\]</span></p>
+<p>Dynamic programming can solve both value functions and the optimal value function. Hence, for the optimal value function case, the abovementioned "sequentially" refers to finding the optimal action at each iteration, and update the policy based on the precision criteria. For the value function case, since we are having a discount factor always smaller than one, we guarantee that the solution will converge regardless of the initial guess of <span class="math inline">\(v(s)\)</span>.</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-09-30T07:11:02+08:00"
-              content="2020-09-30">
-          09-30
-        </time>
-      </div>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
+              <a href="/tags/%E6%A6%82%E7%8E%87%E7%BC%96%E7%A8%8B/" rel="tag"><i class="fa fa-tag"></i> 概率编程</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2020/09/30/excel-python-screenshot/" itemprop="url">
-            <span itemprop="name">使用Python对Excel单元格截图</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/09/30/multivar-data-note/" rel="prev" title="Notes on Multivariate Data Analysis via Matrix Decompositions">
+      <i class="fa fa-chevron-left"></i> Notes on Multivariate Data Analysis via Matrix Decompositions
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/10/09/economics/" rel="next" title="Notes on Topics of Economics">
+      Notes on Topics of Economics <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
-
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -264,6 +338,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-decision-process"><span class="nav-text">1. Markov Decision Process</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#elements"><span class="nav-text">1.1 Elements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#value-functions-from-bellman-equation"><span class="nav-text">1.2 Value Functions from Bellman Equation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-improvement"><span class="nav-text">1.3 Policy Improvement</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
